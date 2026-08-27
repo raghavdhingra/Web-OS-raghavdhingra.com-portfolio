@@ -3,7 +3,7 @@
   width: 100%;
 }
 .camera-video-container {
-  object-fit: contain;
+  object-fit: cover;
   height: 100%;
   width: 100%;
   transform: rotateY(180deg);
@@ -47,19 +47,16 @@
 
 .captured-image {
   position: absolute;
-  top: 40px;
-  left: 10px;
-  height: 200px;
-  width: 350px;
+  top: 0;
+  left: 0;
   animation: move-amin 5s ease forwards;
   filter: drop-shadow(0 0 5px #0009);
   border: 0.5rem solid #fff8;
   border-radius: 10px;
 }
+
 .captured-image-canvas {
-  height: 100%;
-  width: 100%;
-  /* transform: rotateY(180deg); */
+  transform: scale(0.5);
 }
 .captured-image:hover .captured-image::after {
   position: absolute;

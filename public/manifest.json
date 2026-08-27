@@ -1,21 +1,24 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Portfolio OS",
+  "name": "Portfolio OS | Raghav Dhingra",
+  "description": "An interactive Linux-style desktop portfolio by Raghav Dhingra.",
+  "id": "/",
+  "lang": "en",
   "icons": [
     {
-      "src": "me.png",
-      "sizes": "64x64 32x32 24x24 16x16",
+      "src": "favicon.ico",
+      "sizes": "48x48 32x32 16x16",
       "type": "image/x-icon",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
-      "src": "me.png",
+      "src": "icon.png",
       "type": "image/png",
       "sizes": "192x192",
       "purpose": "any maskable"
     },
     {
-      "src": "me.png",
+      "src": "icon.png",
       "type": "image/png",
       "sizes": "512x512",
       "purpose": "any maskable"
@@ -25,5 +28,7 @@
   "theme_color": "#F4BD42",
   "background_color": "#2B2929",
   "display": "standalone",
-  "scope": "/"
+  "orientation": "any",
+  "scope": "/",
+  "categories": ["personalization", "productivity"]
 }

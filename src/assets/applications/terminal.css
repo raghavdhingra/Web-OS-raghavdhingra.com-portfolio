@@ -7,6 +7,8 @@
   overflow-x: hidden;
   font-size: 0.9rem;
   cursor: text;
+  padding: 0.3rem 0.4rem;
+  box-sizing: border-box;
 }
 .terminal-editable-container::-webkit-scrollbar {
   width: 5px;
@@ -24,9 +26,46 @@
 .terminal-main-content {
   margin: 0.5rem 0;
 }
+.terminal-input-wrap {
+  position: relative;
+  display: inline-grid;
+  grid-template-areas: "input";
+  align-items: baseline;
+  min-width: 1ch;
+}
+.terminal-input-ghost,
 .terminal-text-editor {
-  padding: 0 0.5rem;
+  grid-area: input;
+  font: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  white-space: pre;
+}
+.terminal-input-ghost {
+  color: transparent;
+  pointer-events: none;
+  user-select: none;
+}
+.terminal-input-suggestion {
+  color: rgba(255, 255, 255, 0.22);
+}
+.terminal-text-editor {
+  padding: 0;
   box-sizing: border-box;
+  color: #fff;
+  background: transparent;
+  border: none;
+  outline: none;
+  min-width: 1ch;
+}
+.terminal-tab-hint {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 1px);
+  font-size: 0.68rem;
+  color: rgba(255, 255, 255, 0.32);
+  white-space: nowrap;
+  pointer-events: none;
 }
 .terminal-text-editor:focus {
   outline: none;
