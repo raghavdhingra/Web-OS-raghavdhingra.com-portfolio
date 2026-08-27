@@ -2,68 +2,189 @@
   position: absolute;
   display: grid;
   grid-template-rows: auto 1fr auto;
-  border-radius: 3px;
+  border-radius: 6px;
   overflow: hidden;
-  box-shadow: 0 0 10px 1px #0002;
+  box-shadow: 0 8px 24px #0005;
 }
-.explorer-heading-name-icon-container {
-  display: grid;
-  height: 100%;
-  grid-template-columns: auto 1fr;
-  gap: 0.5rem;
+.explorer-container.is-maximised {
+  border-radius: 0;
+  box-shadow: none;
 }
 .explorer-header {
-  background: linear-gradient(rgb(53, 49, 50), rgb(50, 49, 50));
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 1rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 0 0.55rem;
+  background: linear-gradient(#3d393a, #323132);
+  color: #f3f3f3;
+  user-select: none;
   cursor: grab;
 }
 .explorer-header:active {
   cursor: grabbing;
 }
-.explorer-header-heading {
-  margin: 0.2rem 0.5rem;
-}
-.explorer-header-btn-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.5rem;
-  margin: 0.4rem 0.5rem;
-}
-.explorer-close-btn {
-  height: 18px;
-  width: 18px;
+.explorer-header-controls {
   display: flex;
-  flex-direction: column;
-  text-align: center;
+  align-items: center;
+  gap: 7px;
+  z-index: 1;
+  cursor: default;
+}
+.explorer-header-heading {
+  position: absolute;
+  left: 50%;
+  display: flex;
+  align-items: center;
   justify-content: center;
-  cursor: pointer;
+  gap: 0.4rem;
+  max-width: calc(100% - 92px);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+.explorer-header-heading img,
+.explorer-header-loader {
+  flex-shrink: 0;
+  display: block;
+}
+.explorer-header-loader {
+  width: 14px;
+  height: 14px;
+  border: 1.5px solid #fff4;
+  border-top-color: #fff;
   border-radius: 50%;
-  transition: 0.2s ease;
-  font-size: 1.1rem;
+  animation: explorer-spin 0.7s linear infinite;
 }
-.explorer-close-color {
-  background-color: rgb(238, 81, 35);
+@keyframes explorer-spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
-.explorer-close-btn:hover {
-  background-color: #fff4;
+.explorer-header-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
 }
-.explorer-close-icon-translate {
-  transform: translateY(-2px);
+.explorer-window-btn {
+  width: 15px;
+  height: 15px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #8a8582;
+  color: transparent;
+  cursor: pointer;
+  transition: filter 0.15s ease, transform 0.15s ease;
+}
+.explorer-window-btn-close {
+  background: #e95420;
+}
+.explorer-window-glyph {
+  display: block;
+  font-size: 11px;
+  line-height: 1;
+  font-weight: 700;
+}
+.explorer-min-bar {
+  width: 8px;
+  height: 1.5px;
+  border-radius: 1px;
+  background: currentColor;
+}
+.explorer-max-icon {
+  width: 7px;
+  height: 7px;
+  border: 1.3px solid currentColor;
+  box-sizing: border-box;
+}
+.explorer-max-icon.is-restore {
+  width: 5px;
+  height: 5px;
+  box-shadow: 1.5px -1.5px 0 -0.6px currentColor, 1.5px -1.5px 0 -1.6px #8a8582;
+}
+.explorer-header-controls:hover .explorer-window-btn,
+.explorer-window-btn:focus-visible {
+  color: #2b211c;
+}
+.explorer-window-btn:hover {
+  filter: brightness(1.12);
+}
+.explorer-window-btn:active {
+  transform: scale(0.92);
+}
+.explorer-window-btn:focus-visible {
+  outline: 2px solid #f4bd42;
+  outline-offset: 2px;
 }
 .explorer-body {
+  min-height: 0;
   background-color: #fff;
   color: #212121;
   overflow: hidden;
   box-sizing: border-box;
 }
 .explorer-footer {
-  border-top: 1px solid #0003;
-  background-color: rgb(247, 247, 247);
-  color: #212121;
-  padding: 0.2rem 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 28px;
+  padding: 0 0.7rem;
+  border-top: 1px solid #0002;
+  background: #f4f4f4;
+  color: #444;
+  font-size: 0.75rem;
+  line-height: 1.2;
   box-sizing: border-box;
+}
+.explorer-footer-label {
+  flex-shrink: 0;
+  color: #6b6b6b;
+}
+.explorer-footer-link {
+  min-width: 0;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #3a3a3a;
+  text-decoration: none;
+}
+.explorer-footer-link:hover {
+  color: #ea5421;
+  text-decoration: underline;
+}
+.explorer-footer-action {
+  flex-shrink: 0;
+  padding: 0.15rem 0.55rem;
+  border: 1px solid #0002;
+  border-radius: 3px;
+  background: #fff;
+  color: #333;
+  text-decoration: none;
+}
+.explorer-footer-action:hover {
+  border-color: #ea5421;
+  color: #ea5421;
+}
+.explorer-footer-status {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: #3d7a3d;
+}
+.explorer-footer-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #3d7a3d;
 }
 .sc-EHOje.dMFuoo {
   overflow-x: hidden;

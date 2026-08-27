@@ -42,7 +42,15 @@ const desktopSlice = createSlice({
     hydrateFromStorage: (_state) => {
       const previousState = loadState<DesktopState>(STORAGE_KEY);
       if (previousState) {
-        return { ...previousState, date: new Date().toISOString() };
+        return {
+          ...previousState,
+          date: new Date().toISOString(),
+          dropDownOpen: false,
+          activityDropDown: false,
+          isStartMenuOpen: false,
+          isFullScreen: false,
+          powerOff: { active: false, timer: 0 },
+        };
       }
     },
     changeSingleClickIcon: (state, { payload }: PayloadAction<boolean>) => {

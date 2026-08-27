@@ -100,29 +100,49 @@ const Camera = ({
   }, [triggerIndex, isTriggered, activityList, stopCamera, supplement]);
 
   useEffect(() => {
+    let cancelled = false;
     let videoStream: MediaStream | undefined;
-    if (videoRef) {
-      const getVideoStream = async () => {
-        try {
-          videoStream = await navigator.mediaDevices.getUserMedia({
-            video: {
-              aspectRatio: 16 / 9,
-            },
-            audio: false,
-          });
-          if (videoRef.current) {
-            videoRef.current.srcObject = videoStream;
-            videoRef.current?.play();
-            setMediaObject(videoStream.getTracks()[0]);
-          }
-        } catch {
-          console.log("Camera permission not given");
+
+    const getVideoStream = async () => {
+      try {
+        videoStream = await navigator.mediaDevices.getUserMedia({
+          video: {
+            aspectRatio: 16 / 9,
+          },
+          audio: false,
+        });
+        if (cancelled) {
+          videoStream.getTracks().forEach((track) => track.stop());
+          return;
         }
-      };
-      getVideoStream();
-    }
+        const video = videoRef.current;
+        if (!video) return;
+        video.srcObject = videoStream;
+        setMediaObject(videoStream.getTracks()[0]);
+        try {
+          await video.play();
+        } catch (error) {
+          if (error instanceof DOMException && error.name === "AbortError") {
+            return;
+          }
+          throw error;
+        }
+      } catch (error) {
+        if (
+          cancelled ||
+          (error instanceof DOMException && error.name === "AbortError")
+        ) {
+          return;
+        }
+        console.log("Camera permission not given");
+      }
+    };
+
+    getVideoStream();
+
     return () => {
-      if (videoStream) videoStream.getTracks()[0].stop();
+      cancelled = true;
+      videoStream?.getTracks().forEach((track) => track.stop());
     };
   }, []);
 
@@ -149,7 +169,13 @@ const Camera = ({
   return (
     <>
       <div className="camera-container">
-        <video className="camera-video-container" ref={videoRef}></video>
+        <video
+          className="camera-video-container"
+          ref={videoRef}
+          autoPlay
+          muted
+          playsInline
+        />
         <div className="camera-container-overlay">
           <div />
           <div>

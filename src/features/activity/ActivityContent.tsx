@@ -49,21 +49,44 @@ export function ActivityBody({ activity }: ActivityContentProps) {
 }
 
 export function ActivityFooter({ activity }: ActivityContentProps) {
-  if (!activity.footerType) return null;
-
-  if (activity.footerType === FOOTER_TYPES.LINK) {
+  if (activity.footerType === FOOTER_TYPES.LINK && activity.link) {
+    const displayUrl = activity.link.replace(/^https?:\/\//, "");
     return (
-      <div className="link-footer">
-        Open in new Tab:{" "}
-        <a href={activity.link} target="_blank" rel="noreferrer">
-          {activity.link}
+      <>
+        <span className="explorer-footer-label">External page</span>
+        <a
+          className="explorer-footer-link"
+          href={activity.link}
+          target="_blank"
+          rel="noreferrer"
+          title={activity.link}
+        >
+          {displayUrl}
         </a>
-      </div>
+        <a
+          className="explorer-footer-action"
+          href={activity.link}
+          target="_blank"
+          rel="noreferrer"
+        >
+          Open
+        </a>
+      </>
     );
   }
 
   if (activity.footerType === FOOTER_TYPES.AUTO_SAVE) {
-    return <>Auto Save</>;
+    return (
+      <>
+        <span className="explorer-footer-label">
+          {activity.system?.name ?? "Untitled"}
+        </span>
+        <span className="explorer-footer-status">
+          <span className="explorer-footer-status-dot" aria-hidden />
+          Saved
+        </span>
+      </>
+    );
   }
 
   return null;

@@ -55,8 +55,7 @@ const RightTaskPane = ({
     const connection =
       nav.connection || nav.mozConnection || nav.webkitConnection;
 
-    networkType(connection ? connection.effectiveType ?? "4g" : "4g");
-
+    networkType(connection?.effectiveType || "5g");
     dateStatus(new Date());
 
     setTimeout(() => {
