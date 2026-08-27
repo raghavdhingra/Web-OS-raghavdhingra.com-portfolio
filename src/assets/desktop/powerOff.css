@@ -3,6 +3,7 @@
   top: 0;
   left: 0;
   height: 100vh;
+  height: 100dvh;
   width: 100vw;
   z-index: 50;
   opacity: 0;
@@ -29,6 +30,12 @@
   font-size: 1.8rem;
   font-weight: bolder;
   letter-spacing: 0.05rem;
+}
+
+@media (max-width: 768px) {
+  .shutdown-loader-text {
+    font-size: 1.25rem;
+  }
 }
 @keyframes powerOff {
   from {

@@ -17,6 +17,22 @@
   --white: #fff;
   --black: #000;
   --transparent: #0000;
+  --taskbar-height: 36px;
+  --dock-width: 60px;
+  --dock-height: 0px;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+body {
+  touch-action: manipulation;
 }
 .font-roboto {
   font-family: "Roboto", sans-serif;
@@ -102,5 +118,50 @@
 @media (min-width: 1200px) {
   .container {
     width: 1170px;
+  }
+}
+
+@media (max-width: 768px) {
+  * {
+    --taskbar-height: 40px;
+    --dock-width: 0px;
+    --dock-height: 56px;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  input,
+  textarea,
+  select {
+    font-size: 16px;
+  }
+
+  .container-center {
+    width: 100%;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .date-full,
+  .task-label-full,
+  .battery-level-label,
+  .charging-slot,
+  .heading {
+    display: none;
+  }
+
+  .date-compact,
+  .task-label-short {
+    display: inline;
+  }
+}
+
+@media (min-width: 769px) {
+  .date-compact,
+  .task-label-short {
+    display: none;
   }
 }

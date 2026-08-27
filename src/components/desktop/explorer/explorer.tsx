@@ -13,6 +13,7 @@ import {
 import fileImage from "../../../assets/icons/file.svg";
 import { assetUrl } from "../../../utils/assetUrl";
 import type { ActivityWindowState } from "@/types/models";
+import { MOBILE_BREAKPOINT } from "@/utils/layout";
 import "../../../assets/desktop/explorer.css";
 
 interface ExplorerOwnProps {
@@ -47,6 +48,9 @@ const Explorer = ({
     const dragTarget = explorerRef.current;
     const windowEl = elementToDrag.current;
     if (!dragTarget || !windowEl) return;
+    if (window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT}px)`).matches) {
+      return;
+    }
 
     let lastX = 0;
     let lastY = 0;
@@ -98,13 +102,17 @@ const Explorer = ({
   return (
     <div
       className={`explorer-container${activity.isMaximise ? " is-maximised" : ""}`}
-      style={{
-        top: activity.isMaximise ? "34px" : activity.top,
-        left: activity.isMaximise ? "60px" : activity.left,
-        height: activity.isMaximise ? "calc(100vh - 35px)" : activity.height,
-        width: activity.isMaximise ? "calc(100vw - 62px)" : activity.width,
-        zIndex: activity.zIndex,
-      }}
+      style={
+        activity.isMaximise
+          ? { zIndex: activity.zIndex }
+          : {
+              top: activity.top,
+              left: activity.left,
+              height: activity.height,
+              width: activity.width,
+              zIndex: activity.zIndex,
+            }
+      }
       ref={elementToDrag}
       onMouseDown={updateZIndex}
     >

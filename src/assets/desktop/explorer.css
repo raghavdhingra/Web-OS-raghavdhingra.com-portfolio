@@ -7,6 +7,10 @@
   box-shadow: 0 8px 24px #0005;
 }
 .explorer-container.is-maximised {
+  top: var(--taskbar-height);
+  left: var(--dock-width);
+  height: calc(100% - var(--taskbar-height) - var(--dock-height));
+  width: calc(100% - var(--dock-width));
   border-radius: 0;
   box-shadow: none;
 }
@@ -188,4 +192,41 @@
 }
 .sc-EHOje.dMFuoo {
   overflow-x: hidden;
+}
+
+@media (max-width: 768px) {
+  .explorer-container,
+  .explorer-container.is-maximised {
+    top: var(--taskbar-height) !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: calc(100% - var(--taskbar-height) - var(--dock-height)) !important;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .explorer-window-btn-min,
+  .explorer-window-btn-max {
+    display: none;
+  }
+
+  .explorer-header {
+    cursor: default;
+  }
+
+  .explorer-header:active {
+    cursor: default;
+  }
+
+  .explorer-footer {
+    flex-wrap: wrap;
+    gap: 0.3rem 0.5rem;
+    min-height: 26px;
+    padding: 0.3rem 0.5rem;
+  }
+
+  .explorer-footer-link {
+    flex-basis: 100%;
+    order: 3;
+  }
 }

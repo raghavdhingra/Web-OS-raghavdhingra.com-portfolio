@@ -30,3 +30,16 @@
   overflow: hidden !important;
   text-overflow: ellipsis;
 }
+
+@media (max-width: 768px) {
+  .desktop-icon-container {
+    height: 80px;
+    width: 68px;
+    margin: 0 0.35rem 0.45rem 0;
+  }
+
+  .desktop-icon-text {
+    font-size: 12px;
+    width: 64px;
+  }
+}

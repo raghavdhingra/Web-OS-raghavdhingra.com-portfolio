@@ -36,10 +36,16 @@ const TaskDate = ({ date }: TaskDateProps) => {
   const dateObj = new Date(date);
 
   return (
-    <div className="centralise">
-      {weekList[dateObj.getDay()]}, {monthList[dateObj.getMonth()]}{" "}
-      {formatter(dateObj.getDate())}&nbsp;&nbsp;
-      {formatter(dateObj.getHours())}:{formatter(dateObj.getMinutes())}
+    <div className="centralise taskbar-date">
+      <span className="date-full">
+        {weekList[dateObj.getDay()]}, {monthList[dateObj.getMonth()]}{" "}
+        {formatter(dateObj.getDate())}&nbsp;&nbsp;
+        {formatter(dateObj.getHours())}:{formatter(dateObj.getMinutes())}
+      </span>
+      <span className="date-compact">
+        {monthList[dateObj.getMonth()]} {formatter(dateObj.getDate())}{" "}
+        {formatter(dateObj.getHours())}:{formatter(dateObj.getMinutes())}
+      </span>
     </div>
   );
 };

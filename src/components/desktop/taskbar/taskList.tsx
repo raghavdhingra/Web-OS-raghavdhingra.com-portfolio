@@ -54,7 +54,10 @@ const TaskList = ({
             </div>
           )}
           <div className="activity-list-nav-grid">
-            <div className="centralise">Activity List</div>
+            <div className="centralise">
+              <span className="task-label-full">Activity List</span>
+              <span className="task-label-short">Apps</span>
+            </div>
             <div className="centralise">
               <div className="down-caret-arrow-translate">▾</div>
             </div>

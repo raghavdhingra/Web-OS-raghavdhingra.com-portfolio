@@ -98,3 +98,14 @@
     grid-template-columns: repeat(6, 1fr);
   }
 }
+
+@media screen and (max-width: 768px) {
+  .terminal-help-grid {
+    grid-template-columns: auto 1fr;
+    gap: 0.25rem 0.6rem;
+  }
+
+  .terminal-help-grid > :nth-child(3n + 2) {
+    display: none;
+  }
+}

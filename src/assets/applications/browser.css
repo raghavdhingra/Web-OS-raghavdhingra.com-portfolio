@@ -10,7 +10,8 @@
   padding: 0.3rem 0.5rem;
   display: grid;
   box-sizing: border-box;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
 }
 .browser-task-image-container > img {
   width: 15px;
@@ -43,9 +44,27 @@ input.browser-search-input {
   border: 1px solid #0002;
   padding: 0.2rem 0.4rem;
   margin: 0 1rem;
+  width: 100%;
+  min-width: 0;
   box-sizing: border-box;
   border-radius: 30px !important;
 }
 .browser-search-input:focus {
   outline: none;
+}
+
+@media (max-width: 768px) {
+  .browser-task-container {
+    padding: 0.25rem 0.35rem;
+  }
+
+  input.browser-search-input {
+    margin: 0 0.4rem;
+    font-size: 0.85rem;
+  }
+
+  .browser-loader {
+    height: calc(100% - 52px);
+    top: 52px;
+  }
 }

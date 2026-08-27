@@ -1,5 +1,6 @@
 import { findBuiltInApp } from "@/data/apps";
 import { assetUrl } from "@/utils/assetUrl";
+import { DOCK_WIDTH, TASKBAR_HEIGHT, getChromeInsets } from "@/utils/layout";
 import type {
   ActivityWindowState,
   AppKey,
@@ -19,8 +20,6 @@ export const FOOTER_TYPES = {
   AUTO_SAVE: "autoSave",
 } as const satisfies Record<string, Exclude<FooterType, null>>;
 
-const TASKBAR_HEIGHT = 34;
-const DOCK_WIDTH = 60;
 const DEFAULT_HEIGHT = 500;
 const DEFAULT_WIDTH = 750;
 
@@ -32,23 +31,45 @@ function getCenteredWindowPosition(
     return { top: `${TASKBAR_HEIGHT}px`, left: `${DOCK_WIDTH}px` };
   }
 
-  const workWidth = window.innerWidth - DOCK_WIDTH;
-  const workHeight = window.innerHeight - TASKBAR_HEIGHT;
-  const left = DOCK_WIDTH + Math.max(0, Math.round((workWidth - width) / 2));
-  const top = TASKBAR_HEIGHT + Math.max(0, Math.round((workHeight - height) / 2));
+  const { dockWidth, dockHeight, taskbar } = getChromeInsets();
+  const workWidth = window.innerWidth - dockWidth;
+  const workHeight = window.innerHeight - taskbar - dockHeight;
+  const left = dockWidth + Math.max(0, Math.round((workWidth - width) / 2));
+  const top = taskbar + Math.max(0, Math.round((workHeight - height) / 2));
 
   return { top: `${top}px`, left: `${left}px` };
 }
 
 function createDefaultWindow() {
+  if (typeof window === "undefined") {
+    return {
+      isLoading: false,
+      date: new Date().toISOString(),
+      isMaximise: false,
+      zIndex: 4,
+      height: `${DEFAULT_HEIGHT}px`,
+      width: `${DEFAULT_WIDTH}px`,
+      ...getCenteredWindowPosition(),
+    };
+  }
+
+  const { mobile, dockWidth, dockHeight, taskbar } = getChromeInsets();
+  const maxWidth = Math.max(240, window.innerWidth - dockWidth - (mobile ? 0 : 16));
+  const maxHeight = Math.max(
+    200,
+    window.innerHeight - taskbar - dockHeight - (mobile ? 0 : 16)
+  );
+  const width = mobile ? maxWidth : Math.min(DEFAULT_WIDTH, maxWidth);
+  const height = mobile ? maxHeight : Math.min(DEFAULT_HEIGHT, maxHeight);
+
   return {
     isLoading: false,
     date: new Date().toISOString(),
-    isMaximise: false,
+    isMaximise: mobile,
     zIndex: 4,
-    height: `${DEFAULT_HEIGHT}px`,
-    width: `${DEFAULT_WIDTH}px`,
-    ...getCenteredWindowPosition(),
+    height: `${height}px`,
+    width: `${width}px`,
+    ...getCenteredWindowPosition(width, height),
   };
 }
 

@@ -1,7 +1,7 @@
 .drop-down-container {
   position: absolute;
   right: 10px;
-  top: 34px;
+  top: var(--taskbar-height);
   width: 100%;
   max-width: 300px;
   display: grid;
@@ -71,4 +71,13 @@
   background: #fff;
   box-shadow: 0 0 2px 0 #777;
   cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .drop-down-container {
+    right: 8px;
+    left: auto;
+    width: calc(100vw - 16px);
+    max-width: 320px;
+  }
 }

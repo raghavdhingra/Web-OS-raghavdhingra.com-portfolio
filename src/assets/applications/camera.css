@@ -23,6 +23,17 @@
   padding: 0 0.5rem;
   box-sizing: border-box;
 }
+
+@media (max-width: 768px) {
+  .camera-capture-button-svg {
+    height: 3.4rem;
+    width: 3.4rem;
+  }
+
+  .timer-container {
+    font-size: 3rem;
+  }
+}
 .camera-capture-button-svg {
   cursor: pointer;
   height: 4rem;

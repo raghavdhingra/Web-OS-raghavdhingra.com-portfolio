@@ -2,6 +2,7 @@
   top: 0;
   left: 0;
   height: 100vh;
+  height: 100dvh;
   width: 100vw;
   position: absolute;
 }
@@ -15,12 +16,11 @@
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #fff;
-  max-width: 500px;
   margin: 0 auto;
   color: #212121;
   border-radius: 5px;
   z-index: 21;
-  width: 100%;
+  width: calc(100% - 2rem);
   max-width: 500px;
   border: 1px solid #0002;
   box-sizing: border-box;

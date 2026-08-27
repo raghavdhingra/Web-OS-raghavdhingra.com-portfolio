@@ -5,6 +5,8 @@
 .task-list-container {
   display: flex;
   overflow: hidden;
+  min-width: 0;
+  align-items: center;
 }
 .task-listing-activity {
   margin: 0 0.2rem;
@@ -75,8 +77,8 @@
 }
 .activity-list-container {
   max-width: 200px !important;
-  top: 34px !important;
-  left: 66px !important;
+  top: var(--taskbar-height) !important;
+  left: calc(var(--dock-width) + 6px) !important;
 }
 .activity-list-nav-grid {
   display: grid;
@@ -98,4 +100,17 @@
 .activity-close-btn:hover {
   background-color: var(--orangeColor);
   color: var(--white);
+}
+
+@media (max-width: 768px) {
+  .task-listing-activity {
+    padding: 0.02rem 0.35rem;
+    gap: 0.2rem;
+  }
+
+  .activity-list-container {
+    left: 8px !important;
+    right: auto;
+    max-width: min(220px, calc(100vw - 16px)) !important;
+  }
 }

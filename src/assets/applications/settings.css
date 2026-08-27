@@ -1,8 +1,9 @@
 .settings-container {
   height: 100%;
   width: 100%;
+  min-height: 0;
   display: grid;
-  grid-template-columns: 200px 1fr;
+  grid-template-columns: 200px minmax(0, 1fr);
 }
 .settings-left-container {
   overflow-y: auto;
@@ -28,6 +29,8 @@
 }
 .settings-right-container {
   background-color: rgb(247, 247, 247);
+  min-width: 0;
+  overflow-y: auto;
 }
 .settings-right-inner-container {
   width: 90% !important;
@@ -120,4 +123,54 @@
 .personalise-text {
   font-size: 1rem;
   color: #000c;
+}
+
+@media (max-width: 768px) {
+  .settings-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
+
+  .settings-left-container {
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    border-right: none;
+    border-bottom: 1px solid rgb(207, 207, 207);
+    padding: 0.25rem 0.35rem;
+  }
+
+  .settings-left-button {
+    flex-shrink: 0;
+    white-space: nowrap;
+    padding: 0.45rem 0.7rem;
+    font-size: 0.85rem;
+  }
+
+  .settings-right-inner-container {
+    width: calc(100% - 1.2rem) !important;
+  }
+
+  .theme-change-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.6rem;
+  }
+
+  .theme-change-division {
+    width: 100%;
+  }
+
+  .theme-change-background {
+    height: 72px;
+  }
+
+  .personalise-2-grid {
+    grid-template-columns: 1fr auto;
+    gap: 0.6rem;
+  }
+
+  .personalise-text {
+    font-size: 0.9rem;
+  }
 }

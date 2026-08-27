@@ -44,7 +44,7 @@ const LowerDesktop = ({
   return (
     <div className="lower-desktop-grid" onClick={closeDropDown}>
       <div className="left-navigation-bar">
-        <div>
+        <div className="left-nav-apps">
           {applications.defaultApps.map((app, index) => (
             <NavItem
               key={`nav-list-${index}`}
@@ -63,15 +63,17 @@ const LowerDesktop = ({
             </NavItem>
           ))}
         </div>
-        <div>
+        <div className="left-nav-start">
           <NavItem hightlight={isStartMenuOpen}>
             <svg
-              height="50px"
-              width="50px"
+              viewBox="0 0 50 50"
+              height="50"
+              width="50"
               className="start-icon-container"
+              aria-hidden
               onClick={() => changeStartMenu(!isStartMenuOpen)}
             >
-              <circle cx="25px" cy="25px" className="start-icon-svg" />
+              <circle cx="25" cy="25" className="start-icon-svg" />
             </svg>
           </NavItem>
         </div>

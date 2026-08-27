@@ -56,8 +56,17 @@ const DesktopWorkingArea = ({
   });
   const [workingAreaHeight, setWorkingAreaHeight] = useState(0);
   useEffect(() => {
-    if (desktopWorkingRef.current)
-      setWorkingAreaHeight(desktopWorkingRef.current.clientHeight);
+    const node = desktopWorkingRef.current;
+    if (!node) return;
+    const updateHeight = () => setWorkingAreaHeight(node.clientHeight);
+    updateHeight();
+    if (typeof ResizeObserver === "undefined") {
+      window.addEventListener("resize", updateHeight);
+      return () => window.removeEventListener("resize", updateHeight);
+    }
+    const observer = new ResizeObserver(updateHeight);
+    observer.observe(node);
+    return () => observer.disconnect();
   }, []);
   const contextMenuHeight = 238;
 
@@ -158,7 +167,7 @@ const DesktopWorkingArea = ({
         } else outerIconsArray.push(desktopIcons);
         outerIconsArray.forEach((desktopIcon, ind) => {
           desktopIconHTML.push(
-            <div key={`outer-icons-${ind}`}>
+            <div className="desktop-icon-column" key={`outer-icons-${ind}`}>
               {desktopIcon.map(
                 (system, index) =>
                   system && (

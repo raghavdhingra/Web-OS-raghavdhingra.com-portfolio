@@ -73,7 +73,7 @@ const RightTaskPane = ({
           <div className="centralise">
             <img src={Wifi} height="17px" alt="Wifi" />
           </div>
-          <div className="centralise">
+          <div className="centralise charging-slot">
             {battery && battery.charging ? (
               <img
                 src={Charging}
@@ -86,7 +86,7 @@ const RightTaskPane = ({
           <div className="centralise">
             <img src={Battery} height="17px" alt="Battery" />
           </div>
-          <div className="centralise">
+          <div className="centralise battery-level-label">
             <div>{battery && parseInt(String(battery.level * 100))}%</div>
           </div>
           <div className="centralise">

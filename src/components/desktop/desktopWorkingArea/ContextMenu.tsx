@@ -19,7 +19,6 @@ const ContextMenu = ({
   top,
   left,
   close,
-  height,
   contextArray,
 }: ContextMenuProps) => {
   const contextMenuRef = useRef<HTMLDivElement>(null);
@@ -49,7 +48,7 @@ const ContextMenu = ({
         <div
           ref={contextMenuRef}
           className="context-menu-container"
-          style={{ top: `${top}px`, left: `${left}px`, height: `${height}px` }}
+          style={{ top: `${top}px`, left: `${left}px` }}
         >
           {contextArray && contextArray.length
             ? contextArray.map((context, index) => (

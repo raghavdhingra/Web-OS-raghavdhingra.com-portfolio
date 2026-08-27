@@ -2,7 +2,12 @@
   background-color: #0005;
   animation: fade-in 0.2s ease-in forwards;
   opacity: 0;
-  height: calc(100vh - 30px);
+  height: 100%;
+  min-width: 0;
+  overflow: hidden;
+}
+.start-menu-container .container-center {
+  height: 100%;
 }
 @keyframes fade-in {
   from {
@@ -20,7 +25,8 @@
   display: grid;
   gap: 1rem;
   grid-template-rows: auto 1fr auto;
-  height: calc(100vh - 31px);
+  height: 100%;
+  min-height: 0;
 }
 input.search-field {
   margin: 0 auto;
@@ -103,6 +109,11 @@ input.search-field:focus {
   color: #fff;
   border-color: #ea5421;
 }
+.start-menu-container-grid > div:nth-child(2) {
+  min-height: 0;
+  overflow-y: auto;
+}
+
 @media screen and (min-width: 600px) {
   .start-application-container {
     grid-template-columns: repeat(3, 1fr);
@@ -111,5 +122,27 @@ input.search-field:focus {
 @media screen and (min-width: 1000px) {
   .start-application-container {
     grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .start-menu-container-grid {
+    gap: 0.6rem;
+  }
+
+  .search-field-container {
+    margin: 0.7rem 0;
+  }
+
+  .start-menu-item {
+    height: 100px;
+    width: 96px;
+    padding: 0.6rem;
+    font-size: 1rem;
+  }
+
+  .start-menu-footer-grid {
+    margin: 0.6rem auto 0.8rem;
+    gap: 0.5rem;
   }
 }

@@ -1,10 +1,14 @@
 .desktop-area-container {
   height: 100%;
   width: 100%;
+  min-width: 0;
+  min-height: 0;
   padding: 0.8rem;
   box-sizing: border-box;
   display: grid;
-  grid-template-columns: repeat(10, auto) 1fr;
+  grid-template-columns: repeat(auto-fill, 80px);
+  align-content: start;
+  justify-content: start;
   animation: fade-in 0.2s ease-in forwards;
   opacity: 0;
 }
@@ -44,14 +48,15 @@
 /* Context Menu */
 .context-menu-container {
   position: absolute;
-  height: 300px;
-  width: 230px;
+  height: auto;
+  max-height: min(70vh, 320px);
+  width: min(230px, calc(100vw - 16px));
   color: var(--lightColor);
   background-color: var(--darkColor);
   border-radius: 5px;
   box-shadow: 0 0 10px 0 #0006;
   animation: opacAnim 0.2s ease;
-  overflow: hidden;
+  overflow: auto;
 }
 @keyframes opacAnim {
   from {
@@ -76,4 +81,16 @@
 }
 .context-menu-content:active {
   filter: brightness(0.8);
+}
+
+@media (max-width: 768px) {
+  .desktop-area-container {
+    padding: 0.6rem 0.45rem 0.4rem;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    justify-items: center;
+  }
+
+  .desktop-icon-column {
+    display: contents;
+  }
 }
